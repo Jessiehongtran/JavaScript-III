@@ -12,12 +12,13 @@
 // Principle 1
 
 // code example for Window Binding
-function sayName(name){
-    console.log(this);
-    return name;
-  }
-  sayName("Hong");
-
+var sayAge = function(){
+    console.log(this.age);
+  };
+  
+  sayAge(35);
+  window.age = 35
+  sayAge();
   
 // Principle 2
 
@@ -37,6 +38,7 @@ var Person = function(name,age){
         }
       }
     }
+
   };
   
   var jay = Person('Jay',19);
@@ -46,6 +48,15 @@ var Person = function(name,age){
 // Principle 3
 
 // code example for New Binding
+
+var Understand = function(principle1, principle2, principle3){
+    this.binding1 = principle1;
+    this.binding2 = principle2;
+    this.binding3 = principle3;
+  };
+  
+  var lesson = new Understand('Implicit', 'Explicit', 'Global');
+  console.log(lesson);
 
 // Principle 4
 
@@ -69,4 +80,6 @@ var intro = function(hob1,hob2){
   var hobbies2 = ['reading','baking']
   
   intro.call(Hong,hobbies1[0],hobbies1[1]);
-  intro.call(Jay,hobbies2[0],hobbies2[1])
+  intro.call(Jay,hobbies2[0],hobbies2[1]);
+  intro.apply(Hong,hobbies1);
+  intro.apply(Jay,hobbies2);
