@@ -12,10 +12,36 @@
 // Principle 1
 
 // code example for Window Binding
+function sayName(name){
+    console.log(this);
+    return name;
+  }
+  sayName("Hong");
 
+  
 // Principle 2
 
 // code example for Implicit Binding
+
+var Person = function(name,age){
+    return {
+      name: name,
+      age: age,
+      sayName: function(){
+        console.log(this.name);
+      },
+      sister: {
+        name: 'Hong',
+        sayName: function(){
+          console.log(this.name);
+        }
+      }
+    }
+  };
+  
+  var jay = Person('Jay',19);
+  jay.sayName();
+  jay.sister.sayName();
 
 // Principle 3
 
@@ -24,3 +50,23 @@
 // Principle 4
 
 // code example for Explicit Binding
+
+var intro = function(hob1,hob2){
+    console.log(this.name + ' is ' + this.age + ' and ' + this.name + ' likes '+ hob1 + ' & ' + hob2 + '.')
+  };
+  
+  var Hong = {
+    name: 'Hong',
+    age:25
+  };
+  
+  var Jay = {
+    name: 'Jay',
+    age: 23
+  };
+  
+  var hobbies1 = ['running','coding'];
+  var hobbies2 = ['reading','baking']
+  
+  intro.call(Hong,hobbies1[0],hobbies1[1]);
+  intro.call(Jay,hobbies2[0],hobbies2[1])
