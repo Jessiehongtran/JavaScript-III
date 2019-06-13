@@ -23,7 +23,7 @@ function GameObject(attrs){
 };
 
 GameObject.prototype.destroy = function(){
-  console.log(`${this.name} was removed from the game.`);
+  return `${this.name} was removed from the game.`;
 };
 
 /*
@@ -32,15 +32,17 @@ GameObject.prototype.destroy = function(){
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
-function CharacterStats(features){
-  this.healthPoints = features.healthPoints;
+function CharacterStats(attrs){
+  GameObject.call(this,attrs);
+  this.healthPoints = attrs.healthPoints;
 };
+CharacterStats.prototype = Object.create(GameObject.prototype);
 
 CharacterStats.prototype.takeDamage = function(){
-console.log(`${this.name} took damage.`);
+return `${this.name} took damage.`;
 };
 
-CharacterStats.prototype = Object.create(GameObject.prototype);
+
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -51,15 +53,16 @@ CharacterStats.prototype = Object.create(GameObject.prototype);
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
-function Humanoid(info){
-  this.team = info.team;
-  this.weapons = info.weapons;
-  this.language = info.language;
-};
-Humanoid.prototype.greet = function(){
-  console.log(`${this.name} offers a greeting in ${this.language}.`);
+function Humanoid(attrs){
+  CharacterStats.call(this,attrs);
+  this.team = attrs.team;
+  this.weapons = attrs.weapons;
+  this.language = attrs.language;
 };
 Humanoid.prototype = Object.create(CharacterStats.prototype);
+Humanoid.prototype.greet = function(){
+  return `${this.name} offers a greeting in ${this.language}.`;
+};
 
  
 /*
